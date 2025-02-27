@@ -4,12 +4,21 @@ const submitButton = contactForm.querySelector('button[type="submit"]');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const message = formData.get('message');
+    
+    // Check message length (characters)
+    if (message.length < 10) {
+        showNotification('Please write at least 10 characters', 'error');
+        return;
+    }
+
     const email = formData.get('email');
     const name = formData.get('name');
-    const message = formData.get('message');
     
     // Using mailto with your actual email
     window.location.href = `mailto:karinlawrencebrown@gmail.com?subject=Portfolio Contact from ${name}&body=From: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+    
+    showNotification('Message sent successfully!', 'success');
 });
 
 // Notification function
@@ -65,6 +74,19 @@ function showNotification(message, type) {
     // Close notification on click
     notification.querySelector('.close-notification').addEventListener('click', () => {
         notification.remove();
+    });
+}
+
+// Add real-time validation for message length
+const messageInput = document.querySelector('textarea[name="message"]');
+if (messageInput) {
+    messageInput.addEventListener('input', () => {
+        const remaining = 10 - messageInput.value.length;
+        if (remaining > 0) {
+            messageInput.setCustomValidity(`Please add ${remaining} more character${remaining === 1 ? '' : 's'}`);
+        } else {
+            messageInput.setCustomValidity('');
+        }
     });
 }
 
