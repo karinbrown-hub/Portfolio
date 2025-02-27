@@ -5,7 +5,8 @@ const submitButton = contactForm.querySelector('button[type="submit"]');
 const messageInput = document.querySelector('textarea[name="message"]');
 if (messageInput) {
     messageInput.addEventListener('input', () => {
-        const remaining = 10 - messageInput.value.length;
+        const charCount = messageInput.value.length;
+        const remaining = 10 - charCount;
         if (remaining > 0) {
             messageInput.setCustomValidity(`Please add ${remaining} more character${remaining === 1 ? '' : 's'}`);
         } else {
@@ -18,20 +19,18 @@ contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const message = formData.get('message');
+    const email = formData.get('email');
+    const name = formData.get('name');
     
-    // Check message length (characters)
     if (message.length < 10) {
         showNotification('Please write at least 10 characters', 'error');
         return;
     }
 
-    const email = formData.get('email');
-    const name = formData.get('name');
-    
-    // Using mailto with from and to emails
     window.location.href = `mailto:karinlawrencebrown@gmail.com?from=alexanja464@gmail.com&subject=Portfolio Contact from ${name}&body=From: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
     
-    showNotification('Message sent successfully!', 'success');
+    showNotification('Opening email client...', 'success');
+    contactForm.reset();
 });
 
 // Notification function
