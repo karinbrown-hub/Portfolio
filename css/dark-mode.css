@@ -1,0 +1,27 @@
+[data-theme="dark"] {
+    --background-light: var(--background-dark);
+    --text-light: var(--text-dark);
+}
+
+[data-theme="dark"] nav {
+    background-color: var(--background-dark);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .project-card {
+    background-color: #2a2a2a;
+}
+
+[data-theme="dark"] footer {
+    background-color: var(--background-dark);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode-toggle {
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+[data-theme="dark"] .dark-mode-toggle i {
+    color: var(--text-dark);
+}
