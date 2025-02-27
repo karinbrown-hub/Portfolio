@@ -1,6 +1,19 @@
 const contactForm = document.getElementById('contact-form');
 const submitButton = contactForm.querySelector('button[type="submit"]');
 
+// Single message input validation
+const messageInput = document.querySelector('textarea[name="message"]');
+if (messageInput) {
+    messageInput.addEventListener('input', () => {
+        const remaining = 10 - messageInput.value.length;
+        if (remaining > 0) {
+            messageInput.setCustomValidity(`Please add ${remaining} more character${remaining === 1 ? '' : 's'}`);
+        } else {
+            messageInput.setCustomValidity('');
+        }
+    });
+}
+
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -76,29 +89,3 @@ function showNotification(message, type) {
         notification.remove();
     });
 }
-
-// Add real-time validation for message length
-const messageInput = document.querySelector('textarea[name="message"]');
-if (messageInput) {
-    messageInput.addEventListener('input', () => {
-        const remaining = 10 - messageInput.value.length;
-        if (remaining > 0) {
-            messageInput.setCustomValidity(`Please add ${remaining} more character${remaining === 1 ? '' : 's'}`);
-        } else {
-            messageInput.setCustomValidity('');
-        }
-    });
-}
-
-document.querySelectorAll('.contact-form').forEach(form => {
-    const messageInput = form.querySelector('textarea[name="message"]');
-    
-    messageInput.addEventListener('input', () => {
-        const wordCount = messageInput.value.trim().split(/\s+/).length;
-        if (wordCount < 10) {
-            messageInput.setCustomValidity('Please write at least 10 words');
-        } else {
-            messageInput.setCustomValidity('');
-        }
-    });
-});
