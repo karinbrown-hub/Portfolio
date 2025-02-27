@@ -15,8 +15,8 @@ contactForm.addEventListener('submit', (e) => {
     const email = formData.get('email');
     const name = formData.get('name');
     
-    // Using mailto with your actual email
-    window.location.href = `mailto:karinlawrencebrown@gmail.com?subject=Portfolio Contact from ${name}&body=From: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+    // Using mailto with from and to emails
+    window.location.href = `mailto:karinlawrencebrown@gmail.com?from=alexanja464@gmail.com&subject=Portfolio Contact from ${name}&body=From: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
     
     showNotification('Message sent successfully!', 'success');
 });
