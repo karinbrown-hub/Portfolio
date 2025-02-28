@@ -34,6 +34,28 @@ nav {
     z-index: 1000;
 }
 
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-theme="dark"] .dark-mode-toggle {
+    color: var(--text-dark);
+}
+
 .nav-brand {
     font-size: 2rem;
     font-weight: 700;
