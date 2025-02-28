@@ -1,7 +1,9 @@
 // Function to create and display project cards
 function displayPortfolioGrid(category = 'all') {
     const portfolioGrid = document.querySelector('.portfolio-grid');
-    portfolioGrid.innerHTML = ''; // Clear existing projects
+    if (!portfolioGrid) return;
+
+    portfolioGrid.innerHTML = '';
 
     const filteredProjects = category === 'all' 
         ? projects 
@@ -12,21 +14,14 @@ function displayPortfolioGrid(category = 'all') {
         projectCard.className = 'portfolio-item';
         projectCard.innerHTML = `
             <div class="portfolio-iframe-container">
+                <div class="iframe-loader">Loading...</div>
                 <iframe 
                     src="${project.embedUrl}" 
                     title="${project.title}"
-                    scrolling="yes">
-                </iframe>
-            </div>
-            <div class="project-info">
-                <h3>${project.title}</h3>
-                <p class="project-description">${project.description}</p>
-                <span class="project-category">${project.category}</span>
-            </div>
-            <div class="portfolio-overlay">
-                <div class="overlay-content">
-                    <button class="btn primary" onclick="openProject('${project.embedUrl}')">View Full Project</button>
-                </div>
+                    loading="lazy"
+                    onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';"
+                    onerror="this.style.display='none'; this.previousElementSibling.textContent='Failed to load content';"
+                ></iframe>
             </div>
         `;
         portfolioGrid.appendChild(projectCard);
@@ -94,7 +89,7 @@ document.querySelectorAll('.filter-btn').forEach(button => {
         
         // Add active class to clicked button
         button.classList.add('active');
-        
+                
         // Filter projects
         displayPortfolioGrid(button.dataset.category);
     });
@@ -157,5 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.onerror = () => {
             console.warn('Failed to load iframe:', iframe.src);
         };
+        
+        iframe.onload = () => {
+            iframe.style.visibility = 'visible';
+        };
+
+        // Hide iframe until loaded
+        iframe.style.visibility = 'hidden';
     });
 });
