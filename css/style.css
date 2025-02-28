@@ -60,6 +60,62 @@ nav {
     color: var(--primary-color);
 }
 
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        position: relative;
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-light);
+        transition: all 0.3s ease;
+    }
+
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background: var(--background-light);
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Show hamburger on mobile */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        position: relative;
+        margin-right: 1rem;
+        z-index: 1000; /* Ensure it's above other elements */
+    }
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -152,8 +208,9 @@ nav {
 
 .carousel-container {
     position: relative;
-    max-width: 1000px;
+    max-width: 800px; /* Reduced from 1000px */
     margin: 0 auto;
+    padding: 0 40px;
     overflow: hidden; /* Prevent horizontal scroll */
     touch-action: none; /* Touch interaction prevention */
 }
@@ -178,8 +235,9 @@ nav {
 
 .project-card iframe {
     width: 100%;
-    height: 600px;
+    height: 400px; /* Reduced from 600px */
     border: none;
+    border-radius: 8px;
 }
 
 .project-overlay {
@@ -532,7 +590,38 @@ footer {
     }
 
     .hamburger {
+                display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        position: relative;
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+
+    .hamburger span {
         display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-light);
+        transition: all 0.3s ease;
+    }
+
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background: var(--background-light);
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu.active {
+        display: flex;
     }
 
     .hero-content h1 {
@@ -563,6 +652,16 @@ footer {
     .service-card {
         padding: 1.5rem;
     }
+
+    .project-card iframe {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card iframe {
+        height: 250px;
+    }
 }
 
 /* Dark Mode Adjustments */
@@ -590,6 +689,10 @@ footer {
 
 [data-theme="dark"] .hero-content h1 {
     color: var(--text-dark);
+}
+
+[data-theme="dark"] .hamburger span {
+    background-color: var(--text-dark);
 }
 
 /* About Page Styles */
@@ -687,7 +790,7 @@ footer {
 
 .contact-method i {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var (--primary-color);
 }
 
 .contact-method h3 {
